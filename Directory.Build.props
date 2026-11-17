@@ -1,0 +1,26 @@
+<Project>
+
+  <!-- Where the WritingIDE SDK comes from.
+
+       By default the plugins build against the WritingIDE source tree checked out next to this repository
+       (..\WritingIDE). Point WritingIdeRoot somewhere else with:  dotnet build -p:WritingIdeRoot=C:\path\to\WritingIDE
+
+       Without the source tree they build against an installed WritingIDE (its WritingIDE.Sdk.dll and
+       WritingIDE.Core.dll); override the folder with -p:WritingIdeInstallDir=... -->
+  <PropertyGroup>
+    <WritingIdeRoot Condition="'$(WritingIdeRoot)' == ''">$(MSBuildThisFileDirectory)..\WritingIDE</WritingIdeRoot>
+    <WritingIdeSdkProject>$(WritingIdeRoot)\src\WritingIDE.Sdk\WritingIDE.Sdk.csproj</WritingIdeSdkProject>
+    <WritingIdeInstallDir Condition="'$(WritingIdeInstallDir)' == ''">$(LocalAppData)\WritingIDE.App\current</WritingIdeInstallDir>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Authors>MrSquirrely</Authors>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+</Project>

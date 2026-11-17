@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsWritingIdePlugin>true</IsWritingIdePlugin>
+    <RootNamespace>AmbientSoundscapes</RootNamespace>
+    <AssemblyName>WritingIdePlugins.AmbientSoundscapes</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Plugins.Tests" />
+  </ItemGroup>
+
+</Project>

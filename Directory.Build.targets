@@ -1,0 +1,29 @@
+<Project>
+
+  <!-- A plugin sets <IsWritingIdePlugin>true</IsWritingIdePlugin>. WritingIDE supplies the SDK and Core at run time,
+       so they are not copied next to the plugin (Private=false). The test project copies them, as it runs on its own. -->
+  <PropertyGroup>
+    <CopyWritingIdeSdk Condition="'$(IsWritingIdePlugin)' == 'true'">false</CopyWritingIdeSdk>
+    <CopyWritingIdeSdk Condition="'$(CopyWritingIdeSdk)' == ''">true</CopyWritingIdeSdk>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- WPF projects do not get System.IO implicitly. -->
+    <Using Include="System.IO" />
+  </ItemGroup>
+
+  <ItemGroup Condition="Exists('$(WritingIdeSdkProject)')">
+    <ProjectReference Include="$(WritingIdeSdkProject)" Private="$(CopyWritingIdeSdk)" />
+  </ItemGroup>
+
+  <ItemGroup Condition="!Exists('$(WritingIdeSdkProject)')">
+    <Reference Include="WritingIDE.Sdk" HintPath="$(WritingIdeInstallDir)\WritingIDE.Sdk.dll" Private="$(CopyWritingIdeSdk)" />
+    <Reference Include="WritingIDE.Core" HintPath="$(WritingIdeInstallDir)\WritingIDE.Core.dll" Private="$(CopyWritingIdeSdk)" />
+  </ItemGroup>
+
+  <Target Name="CheckWritingIdeSdk" BeforeTargets="ResolveAssemblyReferences"
+          Condition="!Exists('$(WritingIdeSdkProject)') And !Exists('$(WritingIdeInstallDir)\WritingIDE.Sdk.dll')">
+    <Error Text="The WritingIDE SDK was not found. Check out WritingIDE next to this repository, or pass -p:WritingIdeRoot=&lt;WritingIDE source folder&gt; or -p:WritingIdeInstallDir=&lt;folder with WritingIDE.Sdk.dll&gt;." />
+  </Target>
+
+</Project>
