@@ -13,7 +13,9 @@ Each plugin adds a window to WritingIDE's **Extensions** menu. A window opens as
 
 ## Install
 
-Check out this repository next to WritingIDE's source (`..\WritingIDE`), close WritingIDE, and run:
+**From WritingIDE:** open **Tools > Extensions and API > Plugin list**, press **Install** next to a plugin, and restart WritingIDE. The list comes from [WritingIDE's discussions](https://github.com/MrSquirrely/WritingIDE/discussions), where each plugin has a page.
+
+**From source:** check out this repository next to WritingIDE's source (`..\WritingIDE`), close WritingIDE, and run:
 
 ```powershell
 .\build\install.ps1
@@ -112,5 +114,11 @@ src/GenreRulePacks       Five packs of rules, the genre report, the Genre Packs 
 tests/Plugins.Tests      xUnit tests for the logic of all four
 build/install.ps1        Builds and installs the plugins into WritingIDE
 ```
+
+`build\package.ps1` builds the release zips and prints their SHA-256 checksums, which a plugin's listing in WritingIDE's discussions needs.
+
+## License
+
+These plugins are free software under the [GNU General Public License, version 3](LICENSE) or (at your option) any later version, the same license as WritingIDE.
 
 Plugins run with WritingIDE's rights, like any extension. Map Maker only opens map files inside the project folder, so a project from someone else cannot make it read files elsewhere.
